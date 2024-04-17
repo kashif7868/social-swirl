@@ -1,0 +1,173 @@
+.hero-section h1 {
+  margin: 1rem 0rem;
+  font-size: 30px;
+  position: relative;
+  top: 4rem;
+}
+
+.hero-section {
+  min-height: 20vh;
+}
+.normal3 {
+  margin-top: 20px;
+  position: relative;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 50px;
+  color: #fff;
+  background-color: #0665e3;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+  top: 73px;
+  left: 0%;
+}
+.normal3:hover {
+  background-color: #021892;
+  transition: all ease-in-out 0.3s;
+}
+
+.services {
+  justify-content: center;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.services h2 {
+  color: #021892;
+  text-align: center;
+  align-items: center;
+  margin-top: 50px;
+  padding-top: 50px;
+  font-size: 3rem;
+}
+
+.services strong {
+  color: brown;
+  opacity: 0;
+  transition: ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.services strong {
+  animation: fadeIn 3s 1s infinite;
+}
+
+.service-container {
+  margin: 0px 14rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.service-container a {
+  display: flex;
+  text-decoration: none;
+}
+
+.service-container img {
+  width: 18%;
+  transition: 0.3s ease-in-out;
+}
+
+.service-container img:hover {
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+/* Recent Preject */
+.heading h2 {
+  margin-top: 100px;
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: normal;
+  text-align: center;
+}
+.heading p {
+  text-align: center;
+  font-size: 15px;
+  color: #ffffff;
+  /* padding: 20px 40px 20px 40px; */
+}
+
+/* Our Company Team */
+.product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product h3 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.product p {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.next-prev-icons {
+  position: absolute;
+  top: 70%;
+  transform: translateY(-41%);
+}
+
+.next-prev-icons.left {
+  left: 0;
+}
+
+.next-prev-icons.right {
+  right: 0;
+}
+
+.next-prev-icons i {
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.next-prev-icons i:hover {
+  color: #007bff;
+}
+
+/* Style for product cards */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-container {
+  display: flex;
+  gap: 4rem;
+  /* Adjust the gap between images */
+}
+
+.product-image img {
+  width: 150px;
+  /* Adjust as needed */
+  height: 150px;
+  /* Adjust as needed */
+  border-radius: 50%;
+  /* Rounded shape */
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-brand {
+  font-size: 1rem;
+  text-align: center;
+}

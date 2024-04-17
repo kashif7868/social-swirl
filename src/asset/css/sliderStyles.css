@@ -1,0 +1,52 @@
+/* sliderStyles.css */
+
+.prev-arrow,
+.next-arrow {
+  position: absolute;
+  font-size: 30px;
+  color: #0870ed;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.7);
+  /* Adjust background color and opacity */
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.prev-arrow:hover,
+.next-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Adjust hover background color and opacity */
+}
+
+.prev-arrow {
+  left: 0;
+}
+
+.next-arrow {
+  right: 0;
+}
+
+.slick-dots {
+  bottom: -45px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px; /* Adjust the size of the dots */
+  color: blue; /* Color of the dots */
+}
+
+.slick-dots li.slick-active button:before {
+  color: darkblue; /* Color of active dot */
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}

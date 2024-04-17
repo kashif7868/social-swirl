@@ -1,0 +1,180 @@
+/* about.css */
+
+/* Style for headings section */
+.headings {
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+}
+
+.about-us-heading {
+  background-color: #00000045;
+  width: 75%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 8rem;
+  left: 12rem;
+}
+.about-us-heading h2 {
+  font-size: 3rem;
+}
+
+/* Style for paragraph */
+.about-us-p {
+  margin: 2rem 4rem;
+  text-align: justify;
+  font-size: 1.3rem;
+}
+
+/* Style for details section */
+.about-details {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.det {
+  flex: 1;
+  max-width: 50%;
+  padding: 20px;
+}
+
+.det h1 {
+  margin-bottom: 20px;
+}
+
+.det p {
+  text-align: justify;
+  width: 40rem;
+  position: relative;
+  bottom: 3rem;
+}
+
+.left-side-img {
+  flex: 1;
+  padding: 20px;
+}
+
+.left-side-img img {
+  display: block;
+  object-fit: cover;
+  width: 80%;
+  height: 80%;
+  position: relative;
+  left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .about-details {
+    flex-direction: column; /* Stacks the image and content vertically on smaller screens */
+  }
+  .det,
+  .left-side-img {
+    max-width: 100%; /* Ensures they take up the full width on smaller screens */
+  }
+}
+
+/* Product Card Styling */
+/* CSS using Tailwind CSS classes */
+
+/* Style for product section */
+.product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product h3 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.product p {
+  margin: 3rem 0rem;
+  text-align: justify;
+}
+
+.next-prev-icons {
+  position: absolute;
+  top: 70%;
+  transform: translateY(-41%);
+}
+
+.next-prev-icons.left {
+  left: 0;
+}
+
+.next-prev-icons.right {
+  right: 0;
+}
+
+.next-prev-icons i {
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.next-prev-icons i:hover {
+  color: #007bff;
+}
+
+/* Style for product cards */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-container {
+  display: flex;
+  gap: 4rem;
+  /* Adjust the gap between images */
+}
+
+.product-image img {
+  width: 150px;
+  /* Adjust as needed */
+  height: 150px;
+  /* Adjust as needed */
+  border-radius: 50%;
+  /* Rounded shape */
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-brand {
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Style for quote section */
+.about-quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0rem;
+}
+.quote {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.quote button {
+  margin-top: 1rem;
+}
+.quote button:hover {
+  background-color: #004794;
+  transition: all ease-in 0.3s;
+}
