@@ -21,7 +21,7 @@
   border: none;
   outline: none;
   transition: 0.2s;
-  top: 73px;
+  top: 30px;
   left: 0%;
 }
 .normal3:hover {
@@ -38,10 +38,10 @@
 .services h2 {
   color: #021892;
   text-align: center;
-  align-items: center;
-  margin-top: 50px;
   padding-top: 50px;
   font-size: 3rem;
+  position: relative;
+  bottom: 3rem;
 }
 
 .services strong {
@@ -62,25 +62,27 @@
 .services strong {
   animation: fadeIn 3s 1s infinite;
 }
-
-.service-container {
-  margin: 0px 14rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+.services {
+  text-align: center;
+  padding: 50px 0;
 }
 
-.service-container a {
-  display: flex;
-  text-decoration: none;
+.service-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  justify-items: center;
 }
 
 .service-container img {
-  width: 18%;
-  transition: 0.3s ease-in-out;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 }
 
 .service-container img:hover {
+  /* transform: scale(1.05); */
   transform: translateY(-10px);
   cursor: pointer;
 }
@@ -110,6 +112,8 @@
 .product h3 {
   font-size: 3rem;
   font-weight: bold;
+  position: relative;
+  bottom: 3rem;
 }
 
 .product p {

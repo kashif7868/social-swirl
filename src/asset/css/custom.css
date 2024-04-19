@@ -1,0 +1,82 @@
+/* *********************************** */
+/* *****Digital Marketing************** */
+/* *********************************** */
+
+button {
+  cursor: pointer;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  width: 80%;
+}
+.text-overlay h2 {
+  margin: 0;
+  font-size: 40px;
+}
+.text-overlay p {
+  text-align: center;
+  margin: 5px 0;
+  font-size: 20px;
+}
+button.normal4 {
+  margin-top: 90px;
+  position: absolute;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 5px 50px;
+  color: #fff;
+  border: solid white;
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s;
+  left: 40%;
+}
+button.normal4:hover {
+  transform: translateY(-5px);
+}
+.dm-headings {
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+}
+
+.dm-details,
+.dm-details2 {
+  padding: 2rem 0;
+}
+.dm-details,
+.dm-details2 img {
+  padding: 2rem 0;
+}
+
+.dm-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.dm-image-container img {
+  width: 100%;
+  height: auto;
+}
+
+.det {
+  margin: 0rem 2rem;
+}
+
+.det h1 {
+  font-size: 3rem;
+}
+
+.det p {
+  display: flex;
+  margin: 4rem 0rem;
+}

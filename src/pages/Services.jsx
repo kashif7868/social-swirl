@@ -71,16 +71,37 @@ const Services = () => {
           providing!
         </h2>
         <div className="container service-container grid grid-cols-3 gap-4">
-          <img src={digtalImage} alt="" id="digitalMarketingImage" />
-          <img src={contentImage} alt="" id="contentCreatorImage" />
-          <img src={brandImage} alt="" id="brandMarketingImage" />
-          <img src={emailImage} alt="" id="emailMarketingImage" />
-          <img src={fiverImage} alt="" id="fiverImage" />
-          <img src={googleImage} alt="" id="googleAdsImage" />
-          <img src={ourTeamImage} alt="" id="ourTeamImage" />
-          <img src={papularImage} alt="" id="popularImage" />
-          <img src={youtubeImage} alt="" id="youtubeImage" />
-          <img src={upworkImage} alt="UpworkImage" id="upworkImage" />
+          {/* Wrap each image with Link */}
+          <Link to="/digital-marketing">
+            <img src={digtalImage} alt="" id="digitalMarketingImage" />
+          </Link>
+          <Link to="/content-creator">
+            <img src={contentImage} alt="" id="contentCreatorImage" />
+          </Link>
+          <Link to="/brand-marketing">
+            <img src={brandImage} alt="" id="brandMarketingImage" />
+          </Link>
+          <Link to="/email-marketing">
+            <img src={emailImage} alt="" id="emailMarketingImage" />
+          </Link>
+          <Link to="/fiver">
+            <img src={fiverImage} alt="" id="fiverImage" />
+          </Link>
+          <Link to="/google-ads">
+            <img src={googleImage} alt="" id="googleAdsImage" />
+          </Link>
+          <Link to="/our-team">
+            <img src={ourTeamImage} alt="" id="ourTeamImage" />
+          </Link>
+          <Link to="/popular">
+            <img src={papularImage} alt="" id="popularImage" />
+          </Link>
+          <Link to="/youtube">
+            <img src={youtubeImage} alt="" id="youtubeImage" />
+          </Link>
+          <Link to="/upwork">
+            <img src={upworkImage} alt="UpworkImage" id="upworkImage" />
+          </Link>
         </div>
       </section>
       {/* Demo Section  */}

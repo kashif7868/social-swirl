@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900");
-
+@import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900");
 html,
 body,
 div,
@@ -62,6 +62,7 @@ figcaption {
   padding: 0;
   border: 0;
   outline: 0;
+  font-family: "Raleway", sans-serif;
 }
 :root {
   --primary-color: #01126c;
@@ -70,6 +71,7 @@ figcaption {
   --link-color: #fff;
   --link-hover-color: #f1f1f1;
 }
+
 html,
 body {
   background: linear-gradient(90deg, #01126c 45%, #021892 65%);

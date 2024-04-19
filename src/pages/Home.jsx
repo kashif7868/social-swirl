@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -36,8 +36,31 @@ import blogImage2 from "../asset/images/blog-item-02.png";
 import blogImage3 from "../asset/images/blog-item-03.png";
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
-
+import { motion, useAnimation } from "framer-motion";
 const Home = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start({ scale: 1, opacity: 1 });
+  }, [controls]);
+
+  const controls2 = useAnimation();
+
+  const handleScrollEnter = () => {
+    setIsVisible(true);
+    controls2.start("visible");
+  };
+
+  const handleScrollExit = () => {
+    setIsVisible(false);
+    controls2.start("hidden");
+  };
+
+  const animationVariants = {
+    visible: { opacity: 1, scale: 1 },
+    hidden: { opacity: 0, scale: 0.9 },
+  };
   const [counterOn, setCounterOn] = useState(false);
   const settings = {
     dots: true,
@@ -53,10 +76,48 @@ const Home = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
-
+  // Box Animation
+  const miniBoxData = [
+    {
+      title: "Get Ideas",
+      image: ideaImage,
+      description: "Godard pabst prism fam cliche.",
+    },
+    {
+      title: "Sketch Up",
+      image: sketchImage,
+      description: "Godard pabst prism fam cliche.",
+    },
+    {
+      title: "Discuss",
+      image: discussImage,
+      description: "Godard pabst prism fam cliche.",
+    },
+    {
+      title: "Revise",
+      image: reviseImage,
+      description: "Godard pabst prism fam cliche.",
+    },
+    {
+      title: "Approve",
+      image: aproveImage,
+      description: "Godard pabst prism fam cliche.",
+    },
+    {
+      title: "Launch",
+      image: launchImage,
+      description: "Godard pabst prism fam cliche.",
+    },
+  ];
   return (
     <>
-      <div className="welcome-area" id="welcome">
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={controls}
+        transition={{ duration: 0.5 }}
+        className="welcome-area"
+        id="welcome"
+      >
         <div className="header-text">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-4">
@@ -79,8 +140,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
-
+      </motion.div>
       {/* Slider */}
       <div className="slider-container">
         <Slider {...settings}>
@@ -219,76 +279,103 @@ const Home = () => {
           </div>
         </Slider>
       </div>
-
       {/* **************************************  */}
       {/* Project about  */}
       {/* **************************************  */}
-      <section className="section pt-28 pb-0" id="features-project">
-        <div className="container-project">
-          <div className="flex flex-wrap items-center">
-            <div
-              className="lg:w-5/12 md:w-full sm:w-full mb-10 lg:mb-0"
-              data-scroll-reveal="enter left move 30px over 0.6s after 0.4s"
-            >
-              <img src={int2Image} className="rounded-lg mx-auto" alt="App" />
-            </div>
-            <div className="lg:w-6/12 md:w-full sm:w-full mx-8">
-              <div className="left-heading">
-                <h2 className="text-3xl font-bold leading-tight mb-6 lg:text-4xl">
-                  Let's discuss about your project
-                </h2>
-              </div>
-              <div className="left-text">
-                <p className="text-lg text-white leading-relaxed mb-6">
-                  Your project is our focus. We're eager to delve into the
-                  details, understand your vision, and collaborate to bring it
-                  to life. Let's start a conversation that leads to your
-                  project's success.
-                </p>
-              </div>
+      <ScrollTrigger onEnter={handleScrollEnter} triggerOnLoad={false}>
+        <section className="section pt-28 pb-0" id="features-project">
+          <div className="container-project">
+            <div className="flex flex-wrap items-center">
+              <motion.div
+                initial={{ x: -30, opacity: 0 }}
+                animate={isVisible ? { x: 0, opacity: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="lg:w-5/12 md:w-full sm:w-full mb-10 lg:mb-0"
+              >
+                <img src={int2Image} className="rounded-lg mx-auto" alt="App" />
+              </motion.div>
+              <motion.div
+                initial={{ x: 30, opacity: 0 }}
+                animate={isVisible ? { x: 0, opacity: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="lg:w-6/12 md:w-full sm:w-full mx-8"
+              >
+                <div className="left-heading">
+                  <h2 className="text-3xl font-bold leading-tight mb-6 lg:text-4xl">
+                    Let's discuss about your project
+                  </h2>
+                </div>
+                <div className="left-text">
+                  <p className="text-lg text-white leading-relaxed mb-6">
+                    Your project is our focus. We're eager to delve into the
+                    details, understand your vision, and collaborate to bring it
+                    to life. Let's start a conversation that leads to your
+                    project's success.
+                  </p>
+                  <Link
+                    to="#"
+                    className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 inline-block mt-4 btn-quit"
+                  >
+                    Get Started
+                  </Link>
+                </div>
+              </motion.div>
             </div>
           </div>
-          {/* <div className="flex justify-center">
-            <div className="w-10/12 border-b border-gray-400"></div>
-          </div> */}
-        </div>
-      </section>
-
+        </section>
+      </ScrollTrigger>
       {/* **************************************  */}
       {/* We can help you to grow your business */}
       {/* **************************************  */}
-      <section className="section pb-16 " id="features-project">
-        <div className="container-bs-help">
-          <div className="flex flex-wrap">
-            <div className="lg:w-6/12 md:w-full sm:w-full mb-10 lg:mb-0 bs-grow ">
-              <div className="left-heading">
-                <h2 className="text-3xl lg:text-4xl font-bold">
-                  We can help you to grow your business
-                </h2>
-              </div>
-              <div className="left-text">
-                <p className="text-lg text-white leading-relaxed">
-                  Experience exponential growth for your business with our
-                  tailored solutions. Let our expertise pave the way for your
-                  success as we work together to expand your brand, reach new
-                  audiences, and achieve your goals.
-                </p>
-              </div>
-            </div>
-            <div className="lg:w-6/12 md:w-full sm:w-full">
-              <img src={helpIamge} className="rounded-lg mx-auto" alt="App" />
+      <ScrollTrigger onEnter={handleScrollEnter} triggerOnLoad={false}>
+        <section className="section pb-16" id="features-project">
+          <div className="container-bs-help">
+            <div className="flex flex-wrap">
+              <motion.div
+                initial={{ x: -30, opacity: 0 }}
+                animate={isVisible ? { x: 0, opacity: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="lg:w-6/12 md:w-full sm:w-full mb-10 lg:mb-0 bs-grow"
+              >
+                <div className="left-heading">
+                  <h2 className="text-3xl lg:text-4xl font-bold">
+                    We can help you to grow your business
+                  </h2>
+                </div>
+                <div className="left-text">
+                  <p className="text-lg text-white leading-relaxed">
+                    Experience exponential growth for your business with our
+                    tailored solutions. Let our expertise pave the way for your
+                    success as we work together to expand your brand, reach new
+                    audiences, and achieve your goals.
+                  </p>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ x: 30, opacity: 0 }}
+                animate={isVisible ? { x: 0, opacity: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="lg:w-6/12 md:w-full sm:w-full"
+              >
+                <img src={helpIamge} className="rounded-lg mx-auto" alt="App" />
+              </motion.div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollTrigger>
       {/* ************************************** */}
       {/* Work Process */}
-      <section className="mini" id="work-process">
-        <div className="mini-content">
-          <div className="container">
-            <div className="row custom-row">
-              <div>
-                <div className="info">
+      <ScrollTrigger onEnter={handleScrollEnter} triggerOnLoad={false}>
+        <section className="mini" id="work-process">
+          <div className="mini-content">
+            <div className="container">
+              <div className="row custom-row">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="info"
+                >
                   <h1 className="text-3xl font-bold leading-tight mb-6 lg:text-4xl">
                     Work Process
                   </h1>
@@ -299,59 +386,31 @@ const Home = () => {
                     with us as we innovate and work together to attain our
                     goals.
                   </p>
-                </div>
+                </motion.div>
               </div>
+              {/* Mini Box Start */}
+              <div className="row custom-row">
+                {miniBoxData.map((box, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.4 + index * 0.2 }}
+                    className="col-lg-2 col-md-3 col-sm-6 col-6"
+                  >
+                    <Link to="#" className="mini-box">
+                      <img src={box.image} alt="" />
+                      <strong>{box.title}</strong>
+                      <span>{box.description}</span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+              {/* Mini Box End */}
             </div>
-            {/* Mini Box Start */}
-            <div className="row custom-row">
-              <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                <Link to="#" className="mini-box">
-                  <img src={ideaImage} alt="" />
-                  <strong>Get Ideas</strong>
-                  <span>Godard pabst prism fam cliche.</span>
-                </Link>
-              </div>
-              <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                <Link to="#" className="mini-box">
-                  <img src={sketchImage} alt="" />
-                  <strong>Sketch Up</strong>
-                  <span>Godard pabst prism fam cliche.</span>
-                </Link>
-              </div>
-              <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                <Link to="#" className="mini-box">
-                  <img src={discussImage} alt="" />
-                  <strong>Discuss</strong>
-                  <span>Godard pabst prism fam cliche.</span>
-                </Link>
-              </div>
-              <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                <Link to="#" className="mini-box">
-                  <img src={reviseImage} alt="" />
-                  <strong>Revise</strong>
-                  <span>Godard pabst prism fam cliche.</span>
-                </Link>
-              </div>
-              <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                <Link to="#" className="mini-box">
-                  <img src={aproveImage} alt="" />
-                  <strong>Approve</strong>
-                  <span>Godard pabst prism fam cliche.</span>
-                </Link>
-              </div>
-              <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                <Link to="#" className="mini-box">
-                  <img src={launchImage} alt="" />
-                  <strong>Launch</strong>
-                  <span>Godard pabst prism fam cliche.</span>
-                </Link>
-              </div>
-            </div>
-            {/* Mini Box End */}
           </div>
-        </div>
-      </section>
-
+        </section>
+      </ScrollTrigger>
       {/* our team  */}
       <div className="team-main-container py-12 px-4">
         <h2 className="testinomal-heading text-3xl font-bold leading-tight mb-6 lg:text-4xl text-white text-center">
@@ -449,126 +508,149 @@ const Home = () => {
       {/* *********************************** */}
       {/*************Price Section  ********  */}
       {/* *********************************** */}
-      <section className="section colored" id="pricing-plans">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="center-heading">
-                <h2 className="section-title">Pricing Plans</h2>
+      <ScrollTrigger onEnter={handleScrollEnter} onExit={handleScrollExit}>
+        <section className="section colored" id="pricing-plans">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="center-heading">
+                  <h2 className="section-title">Pricing Plans</h2>
+                </div>
+              </div>
+              <div className="offset-lg-3 col-lg-6">
+                <div className="center-text">
+                  <p>
+                    Solutions tailored to your needs, backed by transparent
+                    pricing. Choose from our range of pricing plans designed to
+                    match your goals and budget. Empower your journey with
+                    value-driven options that ensure you get the most out of
+                    every investment.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="offset-lg-3 col-lg-6">
-              <div className="center-text">
-                <p>
-                  Solutions tailored to your needs, backed by transparent
-                  pricing. Choose from our range of pricing plans designed to
-                  match your goals and budget. Empower your journey with
-                  value-driven options that ensure you get the most out of every
-                  investment.
-                </p>
-              </div>
+
+            <div className="flex flex-wrap justify-center">
+              {/* Starter Plan */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={
+                  isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
+                transition={{ duration: 0.5 }}
+                className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8"
+              >
+                <div className="pricing-item">
+                  <div className="pricing-header">
+                    <h3 className="pricing-title">Starter</h3>
+                  </div>
+                  <div className="pricing-body">
+                    <div className="price-wrapper bg-blue-500">
+                      <span className="currency">$</span>
+                      <span className="price">14.50</span>
+                      <span className="period">monthly</span>
+                    </div>
+                    <ul className="list">
+                      <li className="active">60 GB space</li>
+                      <li className="active">600 GB transfer</li>
+                      <li className="active">Pro Design Panel</li>
+                      <li>15-minute support</li>
+                      <li>Unlimited Emails</li>
+                      <li>24/7 Security</li>
+                    </ul>
+                  </div>
+                  <div className="pricing-footer">
+                    <Link
+                      to="#"
+                      className="main-button demo-btn bg-blue-500 text-white"
+                    >
+                      Purchase Now
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Premium Plan */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={
+                  isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8"
+              >
+                <div className="pricing-item active">
+                  <div className="pricing-header">
+                    <h3 className="pricing-title">Premium</h3>
+                  </div>
+                  <div className="pricing-body">
+                    <div className="price-wrapper bg-blue-500">
+                      <span className="currency">$</span>
+                      <span className="price">21.50</span>
+                      <span className="period">monthly</span>
+                    </div>
+                    <ul className="list">
+                      <li className="active">120 GB space</li>
+                      <li className="active">1200 GB transfer</li>
+                      <li className="active">Pro Design Panel</li>
+                      <li className="active">15-minute support</li>
+                      <li>Unlimited Emails</li>
+                      <li>24/7 Security</li>
+                    </ul>
+                  </div>
+                  <div className="pricing-footer">
+                    <Link
+                      to="#"
+                      className="main-button demo-btn bg-blue-500 text-white"
+                    >
+                      Purchase Now
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Advanced Plan */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={
+                  isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8"
+              >
+                <div className="pricing-item">
+                  <div className="pricing-header">
+                    <h3 className="pricing-title">Advanced</h3>
+                  </div>
+                  <div className="pricing-body">
+                    <div className="price-wrapper bg-blue-500">
+                      <span className="currency">$</span>
+                      <span className="price">42.00</span>
+                      <span className="period">monthly</span>
+                    </div>
+                    <ul className="list">
+                      <li className="active">250 GB space</li>
+                      <li className="active">5000 GB transfer</li>
+                      <li className="active">Pro Design Panel</li>
+                      <li className="active">15-minute support</li>
+                      <li className="active">Unlimited Emails</li>
+                      <li className="active">24/7 Security</li>
+                    </ul>
+                  </div>
+                  <div className="pricing-footer">
+                    <Link
+                      to="#"
+                      className="main-button demo-btn bg-blue-500 text-white"
+                    >
+                      Purchase Now
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
-
-          <div className="flex flex-wrap justify-center">
-            {/* Starter Plan */}
-            <div className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pricing-item">
-                <div className="pricing-header">
-                  <h3 className="pricing-title">Starter</h3>
-                </div>
-                <div className="pricing-body">
-                  <div className="price-wrapper bg-blue-500">
-                    <span className="currency">$</span>
-                    <span className="price">14.50</span>
-                    <span className="period">monthly</span>
-                  </div>
-                  <ul className="list">
-                    <li className="active">60 GB space</li>
-                    <li className="active">600 GB transfer</li>
-                    <li className="active">Pro Design Panel</li>
-                    <li>15-minute support</li>
-                    <li>Unlimited Emails</li>
-                    <li>24/7 Security</li>
-                  </ul>
-                </div>
-                <div className="pricing-footer">
-                  <Link
-                    to="#"
-                    className="main-button demo-btn bg-blue-500 text-white"
-                  >
-                    Purchase Now
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Premium Plan */}
-            <div className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pricing-item active">
-                <div className="pricing-header">
-                  <h3 className="pricing-title">Premium</h3>
-                </div>
-                <div className="pricing-body">
-                  <div className="price-wrapper bg-blue-500">
-                    <span className="currency">$</span>
-                    <span className="price">21.50</span>
-                    <span className="period">monthly</span>
-                  </div>
-                  <ul className="list">
-                    <li className="active">120 GB space</li>
-                    <li className="active">1200 GB transfer</li>
-                    <li className="active">Pro Design Panel</li>
-                    <li className="active">15-minute support</li>
-                    <li>Unlimited Emails</li>
-                    <li>24/7 Security</li>
-                  </ul>
-                </div>
-                <div className="pricing-footer">
-                  <Link
-                    to="#"
-                    className="main-button demo-btn bg-blue-500 text-white"
-                  >
-                    Purchase Now
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Advanced Plan */}
-            <div className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pricing-item">
-                <div className="pricing-header">
-                  <h3 className="pricing-title">Advanced</h3>
-                </div>
-                <div className="pricing-body">
-                  <div className="price-wrapper bg-blue-500">
-                    <span className="currency">$</span>
-                    <span className="price">42.00</span>
-                    <span className="period">monthly</span>
-                  </div>
-                  <ul className="list">
-                    <li className="active">250 GB space</li>
-                    <li className="active">5000 GB transfer</li>
-                    <li className="active">Pro Design Panel</li>
-                    <li className="active">15-minute support</li>
-                    <li className="active">Unlimited Emails</li>
-                    <li className="active">24/7 Security</li>
-                  </ul>
-                </div>
-                <div className="pricing-footer">
-                  <Link
-                    to="#"
-                    className="main-button demo-btn bg-blue-500 text-white"
-                  >
-                    Purchase Now
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </ScrollTrigger>
       {/* *********************************** */}
       {/*************Project Section  ********  */}
       {/* *********************************** */}
@@ -632,114 +714,142 @@ const Home = () => {
       </ScrollTrigger>
       {/* *********************************** */}
       {/* *************blog************** */}
-      {/* *********************************** */}
-      <section className="section" id="blog">
-        <div className="container">
-          {/* Section Title */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="col-span-12 lg:col-span-12">
-              <div className="center-heading">
-                <h2 className="section-title">Blog Entries</h2>
+      {/* *********************************** */}{" "}
+      <ScrollTrigger onEnter={handleScrollEnter} onExit={handleScrollExit}>
+        <section className="section" id="blog">
+          <div className="container">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <div className="col-span-12 lg:col-span-12">
+                <div className="center-heading">
+                  <motion.h2
+                    className="section-title"
+                    animate={isVisible }
+                    variants={animationVariants}
+                  >
+                    Blog Entries
+                  </motion.h2>
+                </div>
+              </div>
+              <div className="col-span-12 lg:col-span-6 lg:col-start-4">
+                <div className="center-text">
+                  <motion.p
+                    className="text-center"
+                    animate={isVisible  }
+                    variants={animationVariants}
+                  >
+                    Exploring insights and inspiration through our blog entries.
+                    Dive into a world of valuable content where we share
+                    expertise, trends, and perspectives. Join the conversation
+                    as we uncover new horizons and offer fresh perspectives on
+                    the topics that matter most.
+                  </motion.p>
+                </div>
               </div>
             </div>
-            <div className="col-span-12 lg:col-span-6 lg:col-start-4">
-              <div className="center-text">
-                <p className="text-center">
-                  Exploring insights and inspiration through our blog entries.
-                  Dive into a world of valuable content where we share
-                  expertise, trends, and perspectives. Join the conversation as
-                  we uncover new horizons and offer fresh perspectives on the
-                  topics that matter most.
-                </p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Blog Post 1 */}
+              <div className="col-span-1 lg:col-span-1">
+                <motion.div
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="blog-post-thumb">
+                    <div className="img">
+                      <img src={blogImage1} alt="Blog 1" />
+                    </div>
+                    <div className="blog-content">
+                      <h3 className="text-xl font-bold">
+                        <Link to="#" className="text-blue-500">
+                          Vivamus ac vehicula dui
+                        </Link>
+                      </h3>
+                      <div className="text">
+                        Cras aliquet ligula dui, vitae fermentum velit tincidunt
+                        id. Praesent eu finibus nunc. Nulla in sagittis eros.
+                        Aliquam egestas augue.
+                      </div>
+                      <Link
+                        to="#"
+                        className="main-button block mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                      >
+                        Read More
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Blog Post 2 */}
+              <div className="col-span-1 lg:col-span-1">
+                <motion.div
+                  initial={{ opacity: 0, y: -100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="blog-post-thumb">
+                    <div className="img">
+                      <img src={blogImage2} alt="Blog 2" />
+                    </div>
+                    <div className="blog-content">
+                      <h3 className="text-xl font-bold">
+                        <Link to="#" className="text-blue-500">
+                          Phasellus convallis augue
+                        </Link>
+                      </h3>
+                      <div className="text">
+                        Aliquam commodo ornare nisl, et scelerisque nisl
+                        dignissim ac. Vestibulum finibus urna ut velit
+                        venenatis, vel ultrices sapien mattis.
+                      </div>
+                      <Link
+                        to="#"
+                        className="main-button block mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                      >
+                        Read More
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Blog Post 3 */}
+              <div className="col-span-1 lg:col-span-1">
+                <motion.div
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="blog-post-thumb">
+                    <div className="img">
+                      <img src={blogImage3} alt="Blog 3" />
+                    </div>
+                    <div className="blog-content">
+                      <h3 className="text-xl font-bold">
+                        <Link to="#" className="text-blue-500">
+                          Nam gravida purus non
+                        </Link>
+                      </h3>
+                      <div className="text">
+                        Maecenas eu erat vitae dui convallis consequat vel
+                        gravida nulla. Vestibulum finibus euismod odio, ut
+                        tempus enim varius eu.
+                      </div>
+                      <Link
+                        to="#"
+                        className="main-button block mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                      >
+                        Read More
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </div>
-
-          {/* Blog Posts */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Blog Post 1 */}
-            <div className="col-span-1 lg:col-span-1">
-              <div className="blog-post-thumb">
-                <div className="img">
-                  <img src={blogImage1} alt="Blog 1" />
-                </div>
-                <div className="blog-content">
-                  <h3 className="text-xl font-bold">
-                    <Link to="#" className="text-blue-500">
-                      Vivamus ac vehicula dui
-                    </Link>
-                  </h3>
-                  <div className="text">
-                    Cras aliquet ligula dui, vitae fermentum velit tincidunt id.
-                    Praesent eu finibus nunc. Nulla in sagittis eros. Aliquam
-                    egestas augue.
-                  </div>
-                  <Link
-                    to="#"
-                    className="main-button block mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Blog Post 2 */}
-            <div className="col-span-1 lg:col-span-1">
-              <div className="blog-post-thumb">
-                <div className="img">
-                  <img src={blogImage2} alt="Blog 2" />
-                </div>
-                <div className="blog-content">
-                  <h3 className="text-xl font-bold">
-                    <Link to="#" className="text-blue-500">
-                      Phasellus convallis augue
-                    </Link>
-                  </h3>
-                  <div className="text">
-                    Aliquam commodo ornare nisl, et scelerisque nisl dignissim
-                    ac. Vestibulum finibus urna ut velit venenatis, vel ultrices
-                    sapien mattis.
-                  </div>
-                  <Link
-                    to="#"
-                    className="main-button block mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Blog Post 3 */}
-            <div className="col-span-1 lg:col-span-1">
-              <div className="blog-post-thumb">
-                <div className="img">
-                  <img src={blogImage3} alt="Blog 3" />
-                </div>
-                <div className="blog-content">
-                  <h3 className="text-xl font-bold">
-                    <Link to="#" className="text-blue-500">
-                      Nam gravida purus non
-                    </Link>
-                  </h3>
-                  <div className="text">
-                    Maecenas eu erat vitae dui convallis consequat vel gravida
-                    nulla. Vestibulum finibus euismod odio, ut tempus enim
-                    varius eu.
-                  </div>
-                  <Link
-                    to="#"
-                    className="main-button block mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </ScrollTrigger>
     </>
   );
 };
